@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Погодное приложение</string>
-    <string name="weather">Погода сегодня</string>
+    <string name="app_name">Приложение погода</string>
+    <string name="weather_text">Погода сейчас</string>
+    <string name="weather_date">21 февраля 2019</string>
+    <string name="clouds_value">Переменная облачность</string>
+    <string name="temperature_value">-8°C</string>
+    <string name="damp_name">Влажность:</string>
+    <string name="damp_value">66%</string>
+    <string name="wind_name">Ветер:</string>
+    <string name="wind_value">6 м/c</string>
+    <string name="wind_course">СЗ</string>
+
+    <string name="city_help">Введите город</string>
+    <string name="send">Отправить</string>
+    <string name="switch1">Дата</string>
+    <string name="check1">Влажность</string>
+    <string name="check2">Направление ветра</string>
+    <string name="check3">Скорость ветра</string>
 </resources>
