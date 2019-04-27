@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Weater Application</string>
-    <string name="weather">weather today</string>
+    <string name="app_name">Weather App</string>
+    <string name="weather_text">Weather now</string>
+    <string name="weather_date">21 feb 2019</string>
+    <string name="clouds_value">Cloudy</string>
+    <string name="temperature_value">-8°C</string>
+    <string name="damp_name">Humidity:</string>
+    <string name="damp_value">66%</string>
+    <string name="wind_name">Wind:</string>
+    <string name="wind_value">6 м/c</string>
+    <string name="wind_course">NW</string>
+
+    <string name="city_help">City name</string>
+    <string name="send">Send</string>
+    <string name="switch1">Date</string>
+    <string name="check1">Humidity:</string>
+    <string name="check2">Wind direction</string>
+    <string name="check3">Wind speed</string>
 </resources>
