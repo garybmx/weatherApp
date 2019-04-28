@@ -14,7 +14,7 @@
     <string name="city_help">City name</string>
     <string name="send">Send</string>
     <string name="switch1">Date</string>
-    <string name="check1">Humidity:</string>
+    <string name="check1">Humidity</string>
     <string name="check2">Wind direction</string>
     <string name="check3">Wind speed</string>
 </resources>

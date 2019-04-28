@@ -19,18 +19,17 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:autofillHints="city"
-                android:hint="@string/city_help" />
+                android:hint="@string/city_help"
+                />
 
 
             <info.hoang8f.widget.FButton
