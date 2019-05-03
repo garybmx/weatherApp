@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Приложение погода</string>
+
     <string name="weather_text">Погода сейчас</string>
     <string name="weather_date">21 февраля 2019</string>
     <string name="clouds_value">Переменная облачность</string>
