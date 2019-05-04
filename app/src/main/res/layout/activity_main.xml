@@ -65,19 +65,22 @@
                 android:id="@+id/isDamp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/check1" />
+                android:text="@string/check1"
+                style="@style/checkBoxStyle"/>
 
             <CheckBox
                 android:id="@+id/isWindCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/check2" />
+                android:text="@string/check2"
+                style="@style/checkBoxStyle"/>
 
             <CheckBox
                 android:id="@+id/isWindValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/check3" />
+                android:text="@string/check3"
+                style="@style/checkBoxStyle"/>
 
 
 

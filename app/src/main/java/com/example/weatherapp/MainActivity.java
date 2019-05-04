@@ -36,14 +36,21 @@ public class MainActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.this.startActivity(getActivityIntent());
+            }
+
+            private Intent getActivityIntent() {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 intent.putExtra(cityExtra, cityName.getText().toString());
-                if(isDate.isChecked()) intent.putExtra(isDateExtra, isDate.getText().toString());
-                if(isHumidity.isChecked()) intent.putExtra(isHumidityExtra, isHumidity.getText().toString());
-                if(isWindCourse.isChecked()) intent.putExtra(isWindCourseExtra, isWindCourse.getText().toString());
-                if(isWindSpeed.isChecked()) intent.putExtra(isWindSpeedExtra, isWindSpeed.getText().toString());
-                MainActivity.this.startActivity(intent);
-
+                if(isDate.isChecked())
+                    intent.putExtra(isDateExtra, isDate.getText().toString());
+                if(isHumidity.isChecked())
+                    intent.putExtra(isHumidityExtra, isHumidity.getText().toString());
+                if(isWindCourse.isChecked())
+                    intent.putExtra(isWindCourseExtra, isWindCourse.getText().toString());
+                if(isWindSpeed.isChecked())
+                    intent.putExtra(isWindSpeedExtra, isWindSpeed.getText().toString());
+                return intent;
             }
         });
 
