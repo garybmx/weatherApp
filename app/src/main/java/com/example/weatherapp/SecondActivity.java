@@ -28,7 +28,11 @@ public class SecondActivity extends AppCompatActivity {
         dampBlock = findViewById(R.id.damp_block);
         windBlock = findViewById(R.id.wind_block);
 
-        if(getIntent().hasExtra(MainActivity.cityExtra)){
+        setViewElements();
+    }
+
+    private void setViewElements() {
+        if(getIntent().hasExtra(MainActivity.cityExtra)) {
             cityText.setText(getIntent().getStringExtra(MainActivity.cityExtra));
         }
         if(getIntent().hasExtra((MainActivity.isDateExtra))){
@@ -39,7 +43,6 @@ public class SecondActivity extends AppCompatActivity {
         if(getIntent().hasExtra((MainActivity.isHumidityExtra))){
             dampBlock.setVisibility(View.VISIBLE);
         }
-
         if((!getIntent().hasExtra(MainActivity.isWindCourseExtra)) && (!getIntent().hasExtra(MainActivity.isWindSpeedExtra))){
             windBlock.setVisibility(View.GONE);
         }
@@ -49,8 +52,5 @@ public class SecondActivity extends AppCompatActivity {
         if(getIntent().hasExtra(MainActivity.isWindSpeedExtra)){
             textWindSpeed.setVisibility(View.VISIBLE);
         }
-
-
-
     }
 }
