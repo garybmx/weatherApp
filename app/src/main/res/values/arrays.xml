@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="Cities">
+        <item>@string/spb</item>
+        <item>@string/msk</item>
+        <item>@string/vrnz</item>
+    </array>
+</resources>
