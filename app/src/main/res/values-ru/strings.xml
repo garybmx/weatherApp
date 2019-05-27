@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Приложение погода</string>
+    <string name="action_settings">Настройки</string>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+    <string name="nav_header_title">Погода в Вашем городе</string>
+     <string name="nav_header_desc">Навигация</string>
 
     <string name="weather_text">Погода сейчас</string>
     <string name="weather_date">21 февраля 2019</string>
@@ -23,5 +28,13 @@
     <string name="spb">Санкт-Петербург</string>
     <string name="msk">Москва</string>
     <string name="vrnz">Воронеж</string>
+    <string name="choose_city">Выбрать город</string>
+    <string name="communicate">Communicate</string>
+    <string name="about">О разработчике</string>
+    <string name="nav_send">Обратная связь</string>
+    <string name="month">Погода на месяц</string>
+    <string name="ten_days">Погода на 10 дней</string>
+    <string name="three_days">Погода на 3 дня</string>
+    <string name="today">Погода сегодня</string>
 
 </resources>
