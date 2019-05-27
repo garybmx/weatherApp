@@ -1,38 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        >
 
         <TextView
             android:id="@+id/city_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="2dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="20dp"
             android:visibility="gone"
-            android:textSize="26sp" />
+            android:text="SPB"
+            android:textSize="@dimen/text_size_medium" />
 
         <TextView
             android:id="@+id/date_text"
-
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="5dp"
-            android:textSize="24sp" />
+            android:text="@string/weather_date"
+            android:textSize="@dimen/text_size_medium" />
 
         <LinearLayout
 
@@ -45,32 +36,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/clouds_value"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size_medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="126dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/temp_value_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="75dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
-                    android:layout_marginTop="40dp"
-                    android:padding="10dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
                     android:text="@string/temperature_value"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/text_size_large" />
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="137dp"
-                    android:layout_height="71dp"
-                    android:layout_marginTop="40dp"
-                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
                     app:srcCompat="@drawable/clouds" />
 
             </LinearLayout>
@@ -80,8 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-
-                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/damp_text"
@@ -89,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
                     android:text="@string/damp_name"
-                    android:textSize="26sp" />
+                    android:textSize="@dimen/text_size_medium" />
                 <TextView
                     android:id="@+id/damp_value"
                     android:layout_width="wrap_content"
@@ -97,7 +88,7 @@
                     android:layout_gravity="center_horizontal|top"
                     android:paddingStart="10dp"
                     android:text="@string/damp_value"
-                    android:textSize="26sp" />
+                    android:textSize="@dimen/text_size_medium" />
 
             </LinearLayout>
 
@@ -105,37 +96,35 @@
                 android:id="@+id/wind_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/wind_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
                     android:text="@string/wind_name"
-                    android:textSize="26sp" />
-
+                    android:textSize="@dimen/text_size_medium" />
                 <TextView
                     android:id="@+id/wind_course_text"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
                     android:paddingStart="5dp"
                     android:text="@string/wind_course"
-                    android:textSize="26sp"
-                    android:visibility="gone" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <TextView
                     android:id="@+id/wind_value_text"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
                     android:paddingStart="10dp"
                     android:text="@string/wind_value"
-                    android:textSize="26sp"
-                    android:visibility="gone" />
+                    android:textSize="@dimen/text_size_medium" />
 
 
             </LinearLayout>
@@ -143,6 +132,5 @@
 
         </LinearLayout>
 
-    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>

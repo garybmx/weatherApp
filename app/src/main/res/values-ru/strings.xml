@@ -18,4 +18,10 @@
     <string name="check1">Влажность</string>
     <string name="check2">Направление ветра</string>
     <string name="check3">Скорость ветра</string>
+    <string name="empty">Пусто</string>
+
+    <string name="spb">Санкт-Петербург</string>
+    <string name="msk">Москва</string>
+    <string name="vrnz">Воронеж</string>
+
 </resources>

@@ -17,4 +17,12 @@
     <string name="check1">Humidity</string>
     <string name="check2">Wind direction</string>
     <string name="check3">Wind speed</string>
+    <string name="empty">Empty</string>
+
+
+    <string name="spb">Saint-Peterburg</string>
+    <string name="msk">Moscow</string>
+    <string name="vrnz">Vorornezh</string>
+
+
 </resources>
