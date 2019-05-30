@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_city"
+            android:title="@string/choose_city" />
+        <item
+            android:id="@+id/nav_day"
+            android:title="@string/today" />
+        <item
+            android:id="@+id/nav_three_days"
+            android:title="@string/three_days" />
+        <item
+            android:id="@+id/nav_ten_days"
+            android:title="@string/ten_days" />
+        <item
+            android:id="@+id/nav_month"
+            android:title="@string/month" />
+    </group>
+
+    <item android:title="@string/communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:title="@string/about" />
+            <item
+                android:id="@+id/nav_send"
+                android:title="@string/nav_send" />
+        </menu>
+    </item>
+
+</menu>

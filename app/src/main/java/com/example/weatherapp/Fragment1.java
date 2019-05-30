@@ -1,7 +1,6 @@
 package com.example.weatherapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -60,23 +59,21 @@ public class Fragment1 extends ListFragment {
     }
 
     private void showFragment2() {
-        if (isExistFragment2) {
+        Fragment2 detail = getFragmentManager().findFragmentById(R.id.temp_value) == null ?
+                null : (Fragment2)getFragmentManager().findFragmentById(R.id.temp_value);
+
             getListView().setItemChecked(currentPosition, true);
-            Fragment2 detail = (Fragment2)
-                    getFragmentManager().findFragmentById(R.id.temp_value);
             if (detail == null || detail.getIndex() != currentPosition) {
                 detail = Fragment2.create(currentPosition);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.temp_value, detail);
+                if (isExistFragment2) {
+                    ft.replace(R.id.temp_value, detail);
+                }
+                else{
+                    ft.replace(R.id.fragment_container, detail);
+                }
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }
-        } else {
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), SecondActivity.class);
-            intent.putExtra("index", currentPosition);
-            startActivity(intent);
-        }
-
     }
 }
