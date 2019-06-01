@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,8 +36,6 @@ public class MainActivity extends AppCompatActivity
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         fragmentManager = getSupportFragmentManager();
         initStartFragment();
-
-
     }
 
     private void initStartFragment() {
@@ -48,8 +47,10 @@ public class MainActivity extends AppCompatActivity
             fragment = new ChooseCityFragment();
             navigationView.setCheckedItem(R.id.nav_city);
         }
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.addToBackStack(null);
+        ft.add(R.id.fragment_container, fragment).commit();
 
-        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
     }
 
     private void initDrawer(Toolbar toolbar) {
@@ -65,11 +66,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (fragmentManager.getBackStackEntryCount() > 1) {
+                fragmentManager.popBackStack();
+            }
+            else{
+                finish();
+            }
         }
     }
 
@@ -91,7 +97,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -101,12 +106,10 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         int id = item.getItemId();
 
-
         if (id == R.id.nav_city) {
             fragment = new ChooseCityFragment();
         } else if (id == R.id.nav_day) {
             fragment = new WetherTodayFragment();
-
         }
         else if (id == R.id.nav_three_days) {
             fragment = new ShowSensors();
@@ -117,11 +120,15 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_month) {
 
         }
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.addToBackStack(null);
+        ft.replace(R.id.fragment_container, fragment).commit();
+         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 }
