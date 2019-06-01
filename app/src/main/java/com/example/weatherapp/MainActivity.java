@@ -1,5 +1,7 @@
 package com.example.weatherapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,8 +17,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_CITY_NAME = "CityName";
+
     NavigationView navigationView;
     FragmentManager fragmentManager;
+    SharedPreferences mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +30,29 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        initDrawer(toolbar);
 
+        fragmentManager = getSupportFragmentManager();
+        Fragment fragment = new Fragment1();
+        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
+        navigationView.setCheckedItem(R.id.nav_city);
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        if(mSettings.contains(APP_CITY_NAME)) {
+
+        }
+    }
+
+    private void initDrawer(Toolbar toolbar) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-       navigationView = findViewById(R.id.nav_view);
-       navigationView.setNavigationItemSelectedListener(this);
-       fragmentManager = getSupportFragmentManager();
-       Fragment fragment = new Fragment1();
-       fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
-       navigationView.setCheckedItem(R.id.nav_city);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
