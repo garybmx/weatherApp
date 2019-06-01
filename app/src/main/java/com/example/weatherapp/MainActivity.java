@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     FragmentManager fragmentManager;
     SharedPreferences mSettings;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +32,24 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initDrawer(toolbar);
-
-        fragmentManager = getSupportFragmentManager();
-        Fragment fragment = new Fragment1();
-        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
-        navigationView.setCheckedItem(R.id.nav_city);
-
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        fragmentManager = getSupportFragmentManager();
+        initStartFragment();
 
-        if(mSettings.contains(APP_CITY_NAME)) {
 
+    }
+
+    private void initStartFragment() {
+        if(mSettings.contains(APP_CITY_NAME)){
+            fragment = new WetherTodayFragment();
+            navigationView.setCheckedItem(R.id.nav_city);
         }
+        else{
+            fragment = new ChooseCityFragment();
+            navigationView.setCheckedItem(R.id.nav_city);
+        }
+
+        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
     }
 
     private void initDrawer(Toolbar toolbar) {
@@ -95,13 +103,13 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_city) {
-            fragment = new Fragment1();
+            fragment = new ChooseCityFragment();
         } else if (id == R.id.nav_day) {
-            fragment = new Fragment2();
+            fragment = new WetherTodayFragment();
 
         }
         else if (id == R.id.nav_three_days) {
-            fragment = new Fragment3();
+            fragment = new ShowSensors();
         }
         else if (id == R.id.nav_ten_days) {
 
