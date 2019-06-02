@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity
         initDrawer(toolbar);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         fragmentManager = getSupportFragmentManager();
-        initStartFragment();
-    }
+        if (fragmentManager.getBackStackEntryCount() == 0) initStartFragment();
+}
 
     private void initStartFragment() {
         if(mSettings.contains(APP_CITY_NAME)){
             fragment = new WetherTodayFragment();
-            navigationView.setCheckedItem(R.id.nav_city);
+            navigationView.setCheckedItem(R.id.nav_day);
         }
         else{
             fragment = new ChooseCityFragment();
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         }
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.add(R.id.fragment_container, fragment).commit();
 
     }
@@ -122,6 +123,7 @@ public class MainActivity extends AppCompatActivity
         }
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.replace(R.id.fragment_container, fragment).commit();
          DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

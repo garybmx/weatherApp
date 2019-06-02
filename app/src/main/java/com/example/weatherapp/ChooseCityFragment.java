@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Fragment1 extends ListFragment {
+public class ChooseCityFragment extends ListFragment {
 
     boolean isExistFragment2;
     int currentPosition = 0;
+    String cityName;
+    SharedPreferences mSettings;
 
     @Override
     public void onAttach(Context context) {
@@ -43,6 +45,7 @@ public class Fragment1 extends ListFragment {
             getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             showFragment2();
         }
+        mSettings = getActivity().getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
     }
     
     @Override
@@ -50,21 +53,20 @@ public class Fragment1 extends ListFragment {
         super.onSaveInstanceState(outState);
         outState.putInt("CurrentCity", currentPosition);
     }
-
     
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         currentPosition = position;
+        cityName = l.getItemAtPosition(position).toString();
         showFragment2();
     }
 
     private void showFragment2() {
-        Fragment2 detail = getFragmentManager().findFragmentById(R.id.temp_value) == null ?
-                null : (Fragment2)getFragmentManager().findFragmentById(R.id.temp_value);
-
+        WetherTodayFragment detail = getFragmentManager().findFragmentById(R.id.temp_value) == null ?
+                null : (WetherTodayFragment)getFragmentManager().findFragmentById(R.id.temp_value);
             getListView().setItemChecked(currentPosition, true);
             if (detail == null || detail.getIndex() != currentPosition) {
-                detail = Fragment2.create(currentPosition);
+                detail = WetherTodayFragment.create(currentPosition);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 if (isExistFragment2) {
                     ft.replace(R.id.temp_value, detail);
@@ -76,4 +78,15 @@ public class Fragment1 extends ListFragment {
                 ft.commit();
             }
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences.Editor ed = mSettings.edit();
+        ed.putString(MainActivity.APP_CITY_NAME, cityName);
+        ed.commit();
+
+    }
+
+
 }
