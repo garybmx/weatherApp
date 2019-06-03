@@ -5,25 +5,6 @@
     android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/city_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginBottom="20dp"
-            android:paddingBottom="20dp"
-            android:visibility="gone"
-            android:text="SPB"
-            android:textSize="@dimen/text_size_medium" />
-
-        <TextView
-            android:id="@+id/date_text"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top"
-            android:text="@string/weather_date"
-            android:textSize="@dimen/text_size_medium" />
 
         <LinearLayout
 
@@ -32,11 +13,31 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/city_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginBottom="5dp"
+                android:visibility="gone"
+                android:text=""
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/date_text"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:text="@string/weather_date"
+                android:textSize="@dimen/text_size_medium" />
+
+
+            <TextView
                 android:id="@+id/clouds_value_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/clouds_value"
                 android:textSize="@dimen/text_size_medium" />
 

@@ -7,6 +7,14 @@ public class WeatherModel {
     private Integer windValue;
     private String cloudsType;
 
+    public WeatherModel(Integer temperatureValue, Integer humidityValue, String windCourse, Integer windValue, String cloudsType){
+        this.temperatureValue = temperatureValue;
+        this.humidityValue = humidityValue;
+        this.windCourse = windCourse;
+        this.windValue = windValue;
+        this.cloudsType = cloudsType;
+    }
+
     public Integer getTemperatureValue() {
         return temperatureValue;
     }

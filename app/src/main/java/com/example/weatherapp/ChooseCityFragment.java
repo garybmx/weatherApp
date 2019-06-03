@@ -3,6 +3,10 @@ package com.example.weatherapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -13,11 +17,10 @@ import android.widget.ListView;
 
 public class ChooseCityFragment extends ListFragment {
 
-    boolean isExistFragment2;
     int currentPosition = 0;
     String cityName;
     SharedPreferences mSettings;
-
+    NavigationView navigationView;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -31,22 +34,25 @@ public class ChooseCityFragment extends ListFragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navigationView = getActivity().findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_city);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.Cities,
                 android.R.layout.simple_list_item_activated_1);
         setListAdapter(adapter);
-        View detailsFrame = getActivity().findViewById(R.id.temp_value);
-        isExistFragment2 = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
+        mSettings = getActivity().getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
         if (savedInstanceState != null) {
             currentPosition = savedInstanceState.getInt("CurrentCity", 0);
         }
-        if (isExistFragment2) {
-            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            showFragment2();
-        }
-        mSettings = getActivity().getSharedPreferences(MainActivity.APP_PREFERENCES, Context.MODE_PRIVATE);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
     }
     
     @Override
@@ -63,29 +69,23 @@ public class ChooseCityFragment extends ListFragment {
     }
 
     private void showFragment2() {
-        WetherTodayFragment detail = getFragmentManager().findFragmentById(R.id.temp_value) == null ?
-                null : (WetherTodayFragment)getFragmentManager().findFragmentById(R.id.temp_value);
-            getListView().setItemChecked(currentPosition, true);
-            if (detail == null || detail.getIndex() != currentPosition) {
-                detail = WetherTodayFragment.create(currentPosition);
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                if (isExistFragment2) {
-                    ft.replace(R.id.temp_value, detail);
-                }
-                else{
-                    ft.replace(R.id.fragment_container, detail);
-                }
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
-            }
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment detail = new WetherTodayFragment();
+        ft.addToBackStack(null);
+        ft.replace(R.id.fragment_container, detail);
+        ft.commit();
+    }
+
+    private void saveCityName() {
+        SharedPreferences.Editor ed = mSettings.edit();
+        ed.putString(MainActivity.APP_CITY_NAME, cityName);
+        ed.commit();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        SharedPreferences.Editor ed = mSettings.edit();
-        ed.putString(MainActivity.APP_CITY_NAME, cityName);
-        ed.commit();
+        saveCityName();
 
     }
 
