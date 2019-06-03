@@ -86,7 +86,6 @@ public class ChooseCityFragment extends ListFragment {
     public void onPause() {
         super.onPause();
         saveCityName();
-
     }
 
 

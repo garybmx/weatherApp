@@ -26,8 +26,6 @@ public class ShowSensors extends Fragment {
         sensorManager = (SensorManager) getContext().getSystemService(getContext().SENSOR_SERVICE);
         defTempSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
         defHumSensor = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
-
-
     }
 
     @Override
