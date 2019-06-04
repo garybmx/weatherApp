@@ -39,12 +39,23 @@
             tools:showIn="@layout/app_bar_main">
             <!-- в портретной ориентации у activity только один фрагмент -->
 
+            <LinearLayout
+                android:id="@+id/wind_block"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="parent">
 
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent" android:layout_height="match_parent">
-            </FrameLayout>
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/fragment_container"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                </FrameLayout>
+
+            </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.design.widget.CoordinatorLayout>

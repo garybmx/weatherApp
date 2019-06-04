@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">App settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Weather App</string>
@@ -40,6 +40,7 @@
     <string name="today">Weather today</string>
     <string name="temp_now_text">Temp now:</string>
     <string name="humidity_now_text">Humidity now:</string>
+    <string name="settings_text">Settings</string>
 
 
 </resources>

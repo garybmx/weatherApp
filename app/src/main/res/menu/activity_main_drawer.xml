@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_city"
-            android:title="@string/choose_city" />
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_day"
             android:title="@string/today" />
@@ -20,16 +20,17 @@
             android:id="@+id/nav_month"
             android:title="@string/month" />
     </group>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_city"
+                android:title="@string/choose_city" />
+        <item
+                android:id="@+id/action_settings"
+                android:title="@string/action_settings"
+               />
+    </group>
 
-    <item android:title="@string/communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:title="@string/about" />
-            <item
-                android:id="@+id/nav_send"
-                android:title="@string/nav_send" />
-        </menu>
-    </item>
 
 </menu>

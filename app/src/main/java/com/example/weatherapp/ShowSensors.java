@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class Fragment3 extends Fragment {
+public class ShowSensors extends Fragment {
     private SensorManager sensorManager;
     private Sensor defTempSensor;
     private Sensor defHumSensor;
@@ -26,13 +26,12 @@ public class Fragment3 extends Fragment {
         sensorManager = (SensorManager) getContext().getSystemService(getContext().SENSOR_SERVICE);
         defTempSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
         defHumSensor = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_3, container, false);
+        View v = inflater.inflate(R.layout.sensors_fragment, container, false);
 
         if(defTempSensor != null){
             tempNow = v.findViewById(R.id.temp_now);
@@ -41,7 +40,7 @@ public class Fragment3 extends Fragment {
         }
 
         if(defHumSensor != null){
-            humNow = v.findViewById(R.id.temp_now);
+            humNow = v.findViewById(R.id.humidity_now);
             sensorManager.registerListener(listenerHum, defHumSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
