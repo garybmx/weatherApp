@@ -36,5 +36,7 @@
     <string name="ten_days">Погода на 10 дней</string>
     <string name="three_days">Погода на 3 дня</string>
     <string name="today">Погода сегодня</string>
+    <string name="temp_now_text">Температура cейчас:</string>
+    <string name="humidity_now_text">Влажность сейчас:</string>
 
 </resources>

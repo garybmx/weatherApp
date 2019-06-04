@@ -38,6 +38,8 @@
     <string name="ten_days">10-Day weather forecasts</string>
     <string name="three_days">3-Day weather forecasts</string>
     <string name="today">Weather today</string>
+    <string name="temp_now_text">Temp now:</string>
+    <string name="humidity_now_text">Humidity now:</string>
 
 
 </resources>

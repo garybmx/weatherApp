@@ -9,10 +9,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment = null;
         int id = item.getItemId();
-        showToast();
+
 
         if (id == R.id.nav_city) {
             fragment = new Fragment1();
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_three_days) {
-            showToast();
+            fragment = new Fragment3();
         }
         else if (id == R.id.nav_ten_days) {
 
@@ -101,14 +99,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void showToast() {
 
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Показать пункт меню!",
-                Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
-    }
 }
 
 
