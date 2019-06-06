@@ -1,15 +1,13 @@
 package com.example.weatherapp;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,37 +15,22 @@ import android.widget.TextView;
 
 import com.example.weatherapp.model.WeatherModel;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
 
 public class WetherTodayFragment extends Fragment{
-
-    WeatherService weatherService;
-    ArrayList<WeatherModel> weatherArray;
+    private final Handler handler = new Handler();
+    private final static String LOG_TAG = MainActivity.class.getSimpleName();
+    WeatherModel weatherToday;
     String cityName;
     TextView cityText;
     TextView tempText;
     NavigationView navigationView;
-    private MyServiceConnection mConnection = null;
-    private boolean isBind = false;
-    private WeatherService.ServiceBinder mService = null;
-    ArrayList<WeatherModel> weatherToday;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        if (!isBind) {
-             Intent intent = new Intent(getContext(),
-                    WeatherService.class);
-         getActivity().bindService(intent, mConnection, getActivity().BIND_AUTO_CREATE);
-        }
-        super.onActivityCreated(savedInstanceState);
-    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        weatherService = new WeatherService();
-        weatherArray = weatherService.getWeather();
-        mConnection = new MyServiceConnection();
     }
 
     @Override
@@ -60,11 +43,7 @@ public class WetherTodayFragment extends Fragment{
         tempText = view.findViewById(R.id.temp_value_text);
         navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_day);
-    }
-
-    public int getIndex() {
-        int index = getArguments().getInt("index", 0);
-        return index;
+        updateWeatherData("Moscow");
     }
 
     @Override
@@ -73,37 +52,48 @@ public class WetherTodayFragment extends Fragment{
         return inflater.inflate(R.layout.day_weather_fragment, container, false);
     }
 
-    private class MyServiceConnection implements ServiceConnection {
 
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-
-            /* Get service object (binder) */
-            mService = (WeatherService.ServiceBinder) service;
-            isBind = mService != null;
-
-            if (isBind) {
-                weatherToday =  mService.getService().getWeather();
-                tempText.setText(weatherToday.get(0).getTemperatureValue().toString() + " °C");
+    private void updateWeatherData(final String city) {
+        new Thread() {
+            @Override
+            public void run() {
+                final JSONObject jsonObject = WeatherDataLoader.getJSONData(city);
+                if(jsonObject == null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                         //   Toast.makeText(getApplicationContext(), R.string.place_not_found, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            weatherToday = renderWeather(jsonObject);
+                            tempText.setText(weatherToday.getTemperatureValue().toString());
+                        }
+                    });
+                }
             }
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isBind = false;
-            mService = null;
-        }
-
+        }.start();
     }
 
-    @Override
-    public void onDestroy() {
-        /* Unbind from a service */
-        if (isBind) {
-            getActivity().unbindService(mConnection);
-            isBind = false;
+    private WeatherModel renderWeather(JSONObject jsonObject) {
+        WeatherModel weatherModel = new WeatherModel();
+        Log.d(LOG_TAG, "json: " + jsonObject.toString());
+        try {
+            JSONObject details = jsonObject.getJSONArray("weather").getJSONObject(0);
+            JSONObject main = jsonObject.getJSONObject("main");
+            weatherModel.setLastUpdatedDate(jsonObject.getLong("dt") * 1000);
+            Double md = main.getDouble("temp");
+            weatherModel.setTemperatureValue(( Integer.valueOf(md.intValue())));
+            weatherModel.setHumidityValue(Integer.valueOf(main.getString("humidity")));
+            weatherModel.setCloudsType(details.getString("description"));
+            weatherModel.setPressure(main.getString("pressure"));
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            Log.e(LOG_TAG, "One or more fields not found in the JSON data");
         }
-
-        super.onDestroy();
+        return weatherModel;
     }
 }
