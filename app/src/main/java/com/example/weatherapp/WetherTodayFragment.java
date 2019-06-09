@@ -10,11 +10,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.weatherapp.rest.OpenWeatherRepo;
 import com.example.weatherapp.rest.entites.WeatherRequestRestModel;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +30,7 @@ public class WetherTodayFragment extends Fragment{
     TextView cityText;
     TextView tempText;
     TextView windText;
+    ImageView imageView;
     LinearLayout windBlock;
     NavigationView navigationView;
 
@@ -55,6 +58,7 @@ public class WetherTodayFragment extends Fragment{
         cityText.setText(cityName);
         tempText = view.findViewById(R.id.temp_value_text);
         windText = view.findViewById(R.id.wind_value_text);
+        imageView = view.findViewById(R.id.imageView);
         windBlock = view.findViewById(R.id.wind_block);
         navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_day);
@@ -75,6 +79,7 @@ public class WetherTodayFragment extends Fragment{
                                            @NonNull Response<WeatherRequestRestModel> response) {
                         if (response.body() != null && response.isSuccessful()) {
                             model = response.body();
+                            setCloudsImage();
                             setTemperature();
                             setWind();
                         }
@@ -86,6 +91,56 @@ public class WetherTodayFragment extends Fragment{
                     }
                 });
 
+    }
+
+    private void setCloudsImage() {
+        String imagePath = getImagePath();
+        imageView.setVisibility(View.VISIBLE);
+        loadImage(imagePath);
+    }
+
+    private String getImagePath() {
+        String path;
+        switch (model.weather[0].description) {
+            case  ("clear sky"):
+                path = "http://openweathermap.org/img/w/01d.png";
+                break;
+            case  ("few clouds"):
+                path = "http://openweathermap.org/img/w/02d.png";
+                break;
+            case  ("scattered clouds"):
+                path = "http://openweathermap.org/img/w/03d.png";
+                break;
+            case  ("broken clouds"):
+                path = "http://openweathermap.org/img/w/04d.png";
+                break;
+            case  ("shower rain"):
+                path = "http://openweathermap.org/img/w/09d.png";
+                break;
+            case  ("rain"):
+                path = "http://openweathermap.org/img/w/10d.png";
+                break;
+            case  ("thunderstorm"):
+                path = "http://openweathermap.org/img/w/11d.png";
+                break;
+            case  ("snow"):
+                path = "http://openweathermap.org/img/w/13d.png";
+                break;
+            case  ("mist"):
+                path = "http://openweathermap.org/img/w/50d.png";
+                break;
+            default:
+                path = "";
+                break;
+        }
+        return path;
+    }
+
+    private void loadImage(String path) {
+        Picasso.get()
+                .load(path)
+                .resize(200, 200)
+                .into(imageView);
     }
 
     private void setWind() {
