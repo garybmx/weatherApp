@@ -54,7 +54,7 @@
                     android:layout_gravity="center_horizontal|top"
                     android:layout_marginTop="20dp"
                     android:padding="5dp"
-                    android:text="@string/temperature_value"
+                    android:visibility="gone"
                     android:textSize="@dimen/text_size_large" />
 
                 <ImageView
@@ -63,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:padding="5dp"
-                    app:srcCompat="@drawable/clouds" />
+                    android:visibility="gone"
+                    />
 
             </LinearLayout>
 
@@ -119,12 +120,11 @@
 
                 <TextView
                     android:id="@+id/wind_value_text"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
                     android:paddingStart="10dp"
-                    android:text="@string/wind_value"
+                    android:text=""
                     android:textSize="@dimen/text_size_medium" />
 
 

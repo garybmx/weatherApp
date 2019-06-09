@@ -3,6 +3,5 @@
     <array name="Cities">
         <item>@string/spb</item>
         <item>@string/msk</item>
-        <item>@string/vrnz</item>
     </array>
 </resources>

@@ -27,9 +27,8 @@
     <string name="empty">Empty</string>
 
 
-    <string name="spb">Saint-Peterburg</string>
-    <string name="msk">Moscow</string>
-    <string name="vrnz">Vorornezh</string>
+    <string name="spb">Saint Petersburg</string>
+   <string name="msk">Moscow</string>
     <string name="choose_city">Choose city</string>
     <string name="communicate">Communicate</string>
     <string name="about">About</string>
@@ -41,6 +40,7 @@
     <string name="temp_now_text">Temp now:</string>
     <string name="humidity_now_text">Humidity now:</string>
     <string name="settings_text">Settings</string>
+    <string name="speed_text">m/s</string>
 
 
 </resources>

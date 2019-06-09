@@ -17,10 +17,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_CITY_NAME = "CityName";
-
     NavigationView navigationView;
     FragmentManager fragmentManager;
     SharedPreferences mSettings;
