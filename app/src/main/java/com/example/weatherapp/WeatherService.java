@@ -7,6 +7,8 @@ import android.os.IBinder;
 
 import com.example.weatherapp.model.WeatherModel;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -19,9 +21,9 @@ public class WeatherService extends Service {
     /**
      * Method for clients.
      * */
-    public ArrayList<WeatherModel> getWeather(){
+    public ArrayList<WeatherModel> getWeather(JSONObject jsonObject){
         ArrayList<WeatherModel> wm = new ArrayList<>();
-        wm.add(new WeatherModel(45, 68, "NW", 10, "Cloudy"));
+        wm.add(new WeatherModel("", 45, 68, "NW", 10, "Cloudy", ""));
         return wm;
     }
 
