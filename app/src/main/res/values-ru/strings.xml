@@ -27,7 +27,6 @@
 
     <string name="spb">Санкт-Петербург</string>
     <string name="msk">Москва</string>
-    <string name="vrnz">Воронеж</string>
     <string name="choose_city">Выбрать город</string>
     <string name="communicate">Communicate</string>
     <string name="about">О разработчике</string>
@@ -39,4 +38,5 @@
     <string name="temp_now_text">Температура cейчас:</string>
     <string name="humidity_now_text">Влажность сейчас:</string>
     <string name="settings_text">Настройки</string>
+    <string name="speed_text">м/c</string>
 </resources>

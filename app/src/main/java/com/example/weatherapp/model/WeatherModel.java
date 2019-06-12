@@ -21,8 +21,7 @@ public class WeatherModel {
 
     }
 
-    public void setPressure(String pressure) {
-        this.pressure = pressure;
+    public void setPressure(String pressure) {        this.pressure = pressure;
     }
 
     public void setTemperatureValue(Integer temperatureValue) {
