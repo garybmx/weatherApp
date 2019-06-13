@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,15 +15,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.weatherapp.database.CityTable;
+import com.example.weatherapp.database.DatabaseHelper;
 import com.example.weatherapp.rest.OpenWeatherRepo;
 import com.example.weatherapp.rest.entites.WeatherRequestRestModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WetherTodayFragment extends Fragment{
+public class WeatherTodayFragment extends Fragment{
     private final Handler handler = new Handler();
     private final static String LOG_TAG = MainActivity.class.getSimpleName();
     WeatherRequestRestModel model = new WeatherRequestRestModel();
@@ -33,10 +38,14 @@ public class WetherTodayFragment extends Fragment{
     ImageView imageView;
     LinearLayout windBlock;
     NavigationView navigationView;
+    SQLiteDatabase database;
+    Integer lastTemperature;
+    List<Integer> tempList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initDB();
     }
 
     @Override
@@ -44,12 +53,31 @@ public class WetherTodayFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         initCityName();
         initViews(view);
+        initLastTemperature();
+        lastTemperature = getLastTemperature();
         requestRetrofit(cityName);
+
+    }
+
+    private void initLastTemperature() {
+        lastTemperature = getLastTemperature();
+        if(lastTemperature != null){
+            tempText.setVisibility(View.VISIBLE);
+            tempText.setText(String.valueOf(lastTemperature) + " \u2103");
+        }
     }
 
     private void initCityName() {
         cityName = getActivity().getSharedPreferences(MainActivity.APP_PREFERENCES,
                 Context.MODE_PRIVATE).getString(MainActivity.APP_CITY_NAME, "");
+
+
+    }
+
+    private Integer getLastTemperature() {
+        tempList = CityTable.getLastTemperature(cityName, database);
+        if(tempList.isEmpty()) return null;
+        return tempList.get(0);
     }
 
     private void initViews(@NonNull View view) {
@@ -62,8 +90,13 @@ public class WetherTodayFragment extends Fragment{
         windBlock = view.findViewById(R.id.wind_block);
         navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_day);
+
+
     }
 
+    private void initDB() {
+        database = new DatabaseHelper(getActivity().getApplicationContext()).getWritableDatabase();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +114,7 @@ public class WetherTodayFragment extends Fragment{
                             model = response.body();
                             setCloudsImage();
                             setTemperature();
+                            saveTemperature();
                             setWind();
                         }
                     }
@@ -93,6 +127,15 @@ public class WetherTodayFragment extends Fragment{
 
     }
 
+    private void saveTemperature() {
+        if(tempList.isEmpty()){
+            CityTable.addCity(cityName, Math.round(model.main.temp), database);
+        }
+        else {
+            CityTable.editCity(cityName, Math.round(model.main.temp), database);
+        }
+    }
+
     private void setCloudsImage() {
         String imagePath = getImagePath();
         imageView.setVisibility(View.VISIBLE);
@@ -103,31 +146,31 @@ public class WetherTodayFragment extends Fragment{
         String path;
         switch (model.weather[0].description) {
             case  ("clear sky"):
-                path = "http://openweathermap.org/img/w/01d.png";
+                path = "https://openweathermap.org/img/w/01d.png";
                 break;
             case  ("few clouds"):
-                path = "http://openweathermap.org/img/w/02d.png";
+                path = "https://openweathermap.org/img/w/02d.png";
                 break;
             case  ("scattered clouds"):
-                path = "http://openweathermap.org/img/w/03d.png";
+                path = "https://openweathermap.org/img/w/03d.png";
                 break;
             case  ("broken clouds"):
                 path = "http://openweathermap.org/img/w/04d.png";
                 break;
             case  ("shower rain"):
-                path = "http://openweathermap.org/img/w/09d.png";
+                path = "https://openweathermap.org/img/w/09d.png";
                 break;
             case  ("rain"):
-                path = "http://openweathermap.org/img/w/10d.png";
+                path = "https://openweathermap.org/img/w/10d.png";
                 break;
             case  ("thunderstorm"):
-                path = "http://openweathermap.org/img/w/11d.png";
+                path = "https://openweathermap.org/img/w/11d.png";
                 break;
             case  ("snow"):
-                path = "http://openweathermap.org/img/w/13d.png";
+                path = "https://openweathermap.org/img/w/13d.png";
                 break;
             case  ("mist"):
-                path = "http://openweathermap.org/img/w/50d.png";
+                path = "https://openweathermap.org/img/w/50d.png";
                 break;
             default:
                 path = "";
