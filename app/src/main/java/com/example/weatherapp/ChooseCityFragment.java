@@ -70,7 +70,7 @@ public class ChooseCityFragment extends ListFragment {
 
     private void showFragment2() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment detail = new WetherTodayFragment();
+        Fragment detail = new WeatherTodayFragment();
         ft.addToBackStack(null);
         ft.replace(R.id.fragment_container, detail);
         ft.commit();

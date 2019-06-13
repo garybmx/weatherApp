@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initStartFragment() {
         if(mSettings.contains(APP_CITY_NAME)){
-            fragment = new WetherTodayFragment();
+            fragment = new WeatherTodayFragment();
             navigationView.setCheckedItem(R.id.nav_day);
         }
         else{
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_city) {
             fragment = new ChooseCityFragment();
         } else if (id == R.id.nav_day) {
-            fragment = new WetherTodayFragment();
+            fragment = new WeatherTodayFragment();
         }
         else if (id == R.id.nav_three_days) {
             fragment = new ShowSensors();
